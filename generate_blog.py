@@ -3,13 +3,14 @@ import os
 from datetime import datetime
 import markdown
 
+# Create posts directory if not exists
 os.makedirs("posts", exist_ok=True)
 
 with open("blog_data.csv", newline="", encoding="utf-8") as csvfile:
     reader = csv.DictReader(csvfile)
     posts = list(reader)
 
-# Generate individual posts
+# Generate individual post pages
 for post in posts:
     md_content = open("post.md", "r").read()
     html_content = md_content \
@@ -39,9 +40,9 @@ for post in posts:
     """
     posts_html += post_card
 
-final_index = index_template.replace("<!-- Posts will be inserted here by generator -->", posts_html)
+final_index = index_template.replace("<!-- Posts will be inserted here by script or generator -->\n{% for post in posts %}\n{% endfor %}", posts_html)
 
 with open("index.html", "w", encoding="utf-8") as f:
     f.write(final_index)
 
-print("✅ Blog generated successfully in /posts and index.html updated.")
+print("Blog generated successfully!")

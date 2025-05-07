@@ -12,7 +12,7 @@
     <!-- Open Graph for Social Sharing -->
     <meta property="og:title" content="My Personal Blog">
     <meta property="og:description" content="Explore tech tutorials, design tips, and more.">
-    <meta property="og:image" content="https://picsum.photos/id/1074/600/400">
+    <meta property="og:image" content="https://example.com/cover-image.jpg">
     <meta property="og:url" content="https://yourwebsite.com">
     <meta property="og:type" content="website">
 
@@ -27,7 +27,15 @@
 </header>
 
 <main class="blog-list">
-    <!-- Posts will be inserted here by generator -->
+    <!-- Posts will be inserted here by script or generator -->
+    {% for post in posts %}
+    <article class="post-card">
+        <img src="{{ post.Image_URL }}" alt="{{ post.Title }}">
+        <h2><a href="posts/{{ post.Title | slugify }}.html">{{ post.Title }}</a></h2>
+        <p class="meta">Published on {{ post.Date }} by {{ post.Author }} in {{ post.Label }}</p>
+        <p>{{ post.Description }}</p>
+    </article>
+    {% endfor %}
 </main>
 
 <footer>
